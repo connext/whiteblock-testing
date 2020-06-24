@@ -38,24 +38,24 @@ services:
       INDRA_SUPPORTED_TOKENS: 0x0d8cc4b8d15D4c3eF1d70af0071376fb26B5669b,0x0000000000000000000000000000000000000000
       NODE_ENV: production
     image: connextproject/indra_node:7.0.0-alpha.0
-  tests:
+tests:
   - name: compose
     description: This was auto-generated from a docker compose file
     system:
-    - type: nats
-      name: nats
-      count: 1
-      port-mappings:
-      - 4222:4222
-    - type: redis
-      name: redis
-      count: 1
-      port-mappings:
-      - 6379:6379
-    - type: node
-      name: node
-      count: 1
-      port-mappings:
-      - 8080:8080
+      - type: nats
+        name: nats
+        count: 1
+        port-mappings:
+          - 4222:4222
+      - type: redis
+        name: redis
+        count: 1
+        port-mappings:
+          - 6379:6379
+      - type: node
+        name: node
+        count: 1
+        port-mappings:
+          - 8080:8080
     timeout: 0s
     wait-for: infinite

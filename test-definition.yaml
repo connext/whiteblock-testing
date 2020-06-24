@@ -1,0 +1,61 @@
+services:
+  - name: nats
+    environment:
+      JWT_SIGNER_PUBLIC_KEY: |2
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB
+        -----END PUBLIC KEY-----
+    image: provide/nats-server:indra
+    script:
+      inline: -D -V
+  - name: redis
+    image: redis:5-alpine
+  - name: node
+    environment:
+      INDRA_ADMIN_TOKEN: best-admin-ever
+      INDRA_ALLOWED_SWAPS: '[{"from":"0x0d8cc4b8d15D4c3eF1d70af0071376fb26B5669b","to":"0x0000000000000000000000000000000000000000","priceOracleType":"HARDCODED"},{"from":"0x0000000000000000000000000000000000000000","to":"0x0d8cc4b8d15D4c3eF1d70af0071376fb26B5669b","priceOracleType":"HARDCODED"}]'
+      INDRA_ETH_CONTRACT_ADDRESSES: '{ "1337": { "ChallengeRegistry": { "address": "0x8CdaF0CD259887258Bc13a92C0a6dA92698644C0", "creationCodeHash": "0xdaa1a0baa2ab3fc4d79eaf4d29cd327db359a235904c8ab0e252e7253ed2ffa7", "runtimeCodeHash": "0x95a7ba13e36095609ca428a901c823bafc3395fb3b36e36952b129fa0e02c654", "txHash": "0xd664f039969293fab1b6b824b0962c258ee3bd9e52ed3098027895f393cc0e11" }, "ConditionalTransactionDelegateTarget": { "address": "0xF12b5dd4EAD5F743C6BaA640B0216200e89B60Da", "creationCodeHash": "0x2980c87bb90ef73565de73408695995648f90c360d95cdb8bf17530fecb0e340", "runtimeCodeHash": "0x703501801ef934f3201725e7bce964951f561644a97d2f7e5fd90032c9abdafd", "txHash": "0x183521db17a3af1e360263c836898247f257aa7c5f04e7b8d2b5abfb8b276a0b" }, "DepositApp": { "address": "0x345cA3e014Aaf5dcA488057592ee47305D9B3e10", "creationCodeHash": "0x62c4b11a37df635614823c154c96aa8211510017acc54e02c3f14e344f2dad6c", "runtimeCodeHash": "0xa6c763f84462fded503978dcf882fe962981fc1f39ffe93764b13482178c77a4", "txHash": "0x48a6924bd81fa65a23794a864b8004922099d801c39eb235572ced233ad2bc22" }, "HashLockTransferApp": { "address": "0xf25186B5081Ff5cE73482AD761DB0eB0d25abfBF", "creationCodeHash": "0x4978fb7ee1a6ff60d510d9f7242898d1040ed8af0414d3ebbb4cd4696e4a84b4", "runtimeCodeHash": "0xfd55d382a4df61fbd807b7480abc0c202eb9840aea6c00e7e6f9073b08e0b193", "txHash": "0xcf187c7351c5f4375d352fcd08fe724590d0d1b2f8b99529e80bc1654f066a6e" }, "IdentityApp": { "address": "0x8f0483125FCb9aaAEFA9209D8E9d7b9C8B9Fb90F", "creationCodeHash": "0x69a7aa07d353dd3af0d1c04de3f1648aa79445a91aacd4bdc1e9bdda1fded5f0", "runtimeCodeHash": "0x06862864c4374dfdd29016ccafbd43434dd4df81746f56a4b7d84e28bd27c15e", "txHash": "0x106cfc14d2d0942500624b5257fef416e1db72f2b596eec88a40a95d6fc4d8a8" }, "MinimumViableMultisig": { "address": "0x9FBDa871d559710256a2502A2517b794B482Db40", "creationCodeHash": "0xe8cc09c611309151470884b455eaf2f90c43fd099982d0c84af97a5a80ec7642", "runtimeCodeHash": "0xf16920195c8c6905dbb61e1ad38dd53aa21f5cfa68e86d45b206226ef93630b6", "txHash": "0xb92db093c30845974ac3253e53dc6e6edaeea7b13edd2ca1a1b52ff1076a9c6c" }, "MultiAssetMultiPartyCoinTransferInterpreter": { "address": "0x2C2B9C9a4a25e24B174f26114e8926a9f2128FE4", "creationCodeHash": "0x59090e59bf5ff543018fb694c257120a80f7bc303e01f9750abbbfead7568ec2", "runtimeCodeHash": "0xc4b6523110486daf683a702724dfaa9a0f6492991bc8d60684ca9159603867fb", "txHash": "0x91cbd93020268f147b18cc3e7f3cb6eea5d9cc0fde44e168e514bcbd7e0ab89e" }, "ProxyFactory": { "address": "0x30753E4A8aad7F8597332E813735Def5dD395028", "creationCodeHash": "0x08bde892fced21bfdd23d8a37db69efffbbfc03580151840d64ed9a949461643", "runtimeCodeHash": "0xac8f45675a678316ab0fcf39c8185f96e2fe4db7eec5f598659bc8c4007fbab5", "txHash": "0x6445aab33914f1ac1043f41729d2e200834ab061f82c276454c7bbb498630e25" }, "SimpleLinkedTransferApp": { "address": "0xFB88dE099e13c3ED21F80a7a1E49f8CAEcF10df6", "creationCodeHash": "0xb875b3f7ed9d66368467e1415d6daa5b64410f497ede10dbe39e78bb81325f46", "runtimeCodeHash": "0x7ca940614fe08a5c6656ed86dfecdc9bc27208520a83193a4bf2c2d6b9162a88", "txHash": "0xea5cc6bb0c75cf8d524cc9b999a6f0163d8b541f05aa21fe5a1ac9a3853393c3" }, "SimpleSignedTransferApp": { "address": "0xAa588d3737B611baFD7bD713445b314BD453a5C8", "creationCodeHash": "0x63d9e3bc309ac60f6d625b8ed24e99bb07fc64fe62f6d5214ab633eae4e75e13", "runtimeCodeHash": "0x0dcdc865bceea840623186cb0355f39dd780ebe68bc5bebd233062cb5a7dc0fb", "txHash": "0xcaff9842e4e70e7c9b0fafb779f5b4d444462cf0285189479b7ed0355664f113" }, "SimpleTwoPartySwapApp": { "address": "0xf204a4Ef082f5c04bB89F7D5E6568B796096735a", "creationCodeHash": "0xa822f943483d87e20eb9b61193e81f78b6e67b334ff0c6d32797f65656a956f0", "runtimeCodeHash": "0x4588451cb884abbf5e7320a831732171a32218eaffc9673b8c2f2376305cedcb", "txHash": "0x29dcd989306a1936a8965be93eb4013606f0906a7be7f2fe399053611c6a27db" }, "SingleAssetTwoPartyCoinTransferInterpreter": { "address": "0x75c35C980C0d37ef46DF04d31A140b65503c0eEd", "creationCodeHash": "0xf464da9b8922c98a988b63590770556dc512733634ef7eb1a97b22aa7f5b6de2", "runtimeCodeHash": "0x32326cf5296c631e45d695c9df2eabe3422af0b207aebc699e2e2b01d3492578", "txHash": "0xf9b7c7045e95e19605512da833fbfd250da2da1a540a9d5ddfe1a5141fc73f1f" }, "TimeLockedPassThrough": { "address": "0x82D50AD3C1091866E258Fd0f1a7cC9674609D254", "creationCodeHash": "0x24c8b09be62e63cb362dc897b98b0e5da3135d34a5885eb9d634b07ce3d8fa90", "runtimeCodeHash": "0x7fafa4077a002c7f0233f70259dfd3603070bc443eec9ca83555daf7e2198a1a", "txHash": "0x0a6a7fc5cddb1969c5fa7f519e1c496d1436fdd177b884892b4037de148678f9" }, "TwoPartyFixedOutcomeInterpreter": { "address": "0xdDA6327139485221633A1FcD65f4aC932E60A2e1", "creationCodeHash": "0x7e7afc8b48cb4cd1e5bf53af7790b476f0726011cffb2d9bafc03216c6f952c7", "runtimeCodeHash": "0xaeac30db4c4a2ff716e9c268288d448e4f8bb52577f839df2cff17bed75d2b24", "txHash": "0xdf2fccf8fe55054e2997bbdab2b976975b231a8be6ef4cd79e29af8b127191cd" }, "WithdrawApp": { "address": "0xeec918d74c746167564401103096D45BbD494B74", "creationCodeHash": "0x209bdb52b65c2c5c388b4607479326dc3ad45ba565ded2fc5743a5cffe1bb051", "runtimeCodeHash": "0xe08437e7acf9ec1faba1e2fe215ed93f6f0a7807e19d6232f9c59f2a3d65f050", "txHash": "0x3466ca7bb3de667d34552288022cc9816f4c3b06612c2df26ecde94eeedddcfe" }, "Token": { "address": "0x0d8cc4b8d15D4c3eF1d70af0071376fb26B5669b", "creationCodeHash": "0x0f5a7fec416c49bd9ff2c93dc9deaecefd6920a95c33c1a19013887603a40a80", "runtimeCodeHash": "0xa52e3215610f412638ecf812b04abc3a1f261048fa0bb9b891a8237a448eeb61", "txHash": "0xe02d09424ea5d73be77a10dbc35d9e1d1f9267c7439679907a9bd0da93d450c1" } } }'
+      INDRA_ETH_MNEMONIC: candy maple cake sugar pudding cream honey rich smooth crumble sweet treat
+      INDRA_ETH_RPC_URL: http://host.docker.internal:8545
+      INDRA_LOG_LEVEL: "4"
+      INDRA_NATS_JWT_SIGNER_PRIVATE_KEY: |2
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEowIBAAKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQABAoIBAGZIs2ZmX5h0/JSTYAAw/KCB6W7Glg4XdY21/3VRdD+Ytj0iMaqbIGjZz/fkeRIVHnKwt4d4dgN3OoEeVyjFHMdc4eb/phxLEFqiI1bxiHvtGWP4d6XsON9Y0mBL5NJk8QNiGZjIn08tsWEmA2bm9gkyj6aPoo8BfBqA9Q5uepgmYIPT2NtEXvTbd2dedAEJDJspHKHqBfcuNBVoVhUixVSgehWGGP4GX+FvAEHbawDrwULkMvgblH+X8nBtzikp29LNpOZSRRbqF/Da0AkluFvuDUUIzitjZs5koSEAteaulkZO08BMxtovQjh/ZPtVZKZ27POCNOgRsbm/lVIXRMECgYEA2TQQ2Xy6eO5XfbiT4ZD1Z1xe9B6Ti7J2fC0ZNNSXs4DzdYVcHNIuZqfK6fGqmByvSnFut7n5Po0z2FdXc7xcKFJdBZdFP3GLXbN9vpRPIk9b6n+0df471uTYwVocmAGXez++y73j5XzHQQW4WmmC5SlKjQUWCGkuzISVjRDtlZ0CgYEAx43KPrJxSijjE2+VWYjNFVuv6KilnWoA8I2cZ7TtPi4h//r5vyOUst0egR3lJ7rBof74VttQPvqAk3GN697IrE/bSwefwG2lM1Ta0KB3jn6b/iT4ckmaOB+v6aDHq/GPW6l/sxD0RIEelRYZlsNLepRgKhcQckhjnWzQuGWSl0MCgYBYJQ0BdeCm2vKejp1U2OL+Qzo1j4MJGi+DTToBepTlv9sNQkWTXKh/+HAcaHp2qI1qhIYOAWbov5zemvNegH5Vzrb5Yd40VPvd1s2c3csPfW0ryQ+PItFd8BkWvl8EQQEcf04KmNE3fF/QP2YFKvR30z3x5LKAT08yqEuYp9oC8QKBgQCfc9XqGU3bEya3Lg8ptt0gtt2ty6xiRwSvMoiKeZCkgdpbH6EWMQktjvBD/a5Q+7KjjgfD54SMfj/lEPR1R9QTk8/HeTUWXsaFaMVbtQ0zSEm/Xq1DLTrUo8U9qmJCK0gA10SZwe9dGctlF36k8DJMpWjd2QYkO2GVthBld4wV3wKBgC7S4q0wmcrQIjyDIFmISQNdOAJhR0pJXG8mK2jECbEXxbKkAJnLj73DJ+1OVBlx4HXx54PiEkV3M3iTinf5tBSi8nA2D3s829F65XKFli1RC4rJv+2ygH8PnXX9rQKhK/v6/jeelKquH8zy894hLZe7feSsWV9GMgb5l9p+UzWB
+        -----END RSA PRIVATE KEY-----
+      INDRA_NATS_JWT_SIGNER_PUBLIC_KEY: |2
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB
+        -----END PUBLIC KEY-----
+      INDRA_NATS_SERVERS: nats://nats:4222
+      INDRA_NATS_WS_ENDPOINT: wss://nats:4221
+      INDRA_PG_DATABASE: indra-node
+      INDRA_PG_HOST: host.docker.internal
+      INDRA_PG_PASSWORD: indra-node
+      INDRA_PG_PORT: "5432"
+      INDRA_PG_USERNAME: indra-node
+      INDRA_PORT: "8080"
+      INDRA_REDIS_URL: redis://redis:6379
+      INDRA_SUPPORTED_TOKENS: 0x0d8cc4b8d15D4c3eF1d70af0071376fb26B5669b,0x0000000000000000000000000000000000000000
+      NODE_ENV: production
+    image: connextproject/indra_node:7.0.0-alpha.0
+  tests:
+  - name: compose
+    description: This was auto-generated from a docker compose file
+    system:
+    - type: nats
+      name: nats
+      count: 1
+      port-mappings:
+      - 4222:4222
+    - type: redis
+      name: redis
+      count: 1
+      port-mappings:
+      - 6379:6379
+    - type: node
+      name: node
+      count: 1
+      port-mappings:
+      - 8080:8080
+    timeout: 0s
+    wait-for: infinite

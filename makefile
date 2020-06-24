@@ -10,8 +10,6 @@ commit=$(shell git rev-parse HEAD | head -c 8)
 
 username=$(shell cat $(dir)/credentials.json | grep '"username":' | head -n 1 | cut -d '"' -f 4)
 
-id=$(shell genesis ps)
-
 ########################################
 # Build Shortcuts
 
@@ -26,5 +24,5 @@ test:
 list: 
 	genesis ps
 
-stop: 
-	genesis stop $(id)
+stop:
+	genesis stop

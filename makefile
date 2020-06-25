@@ -10,6 +10,8 @@ commit=$(shell git rev-parse HEAD | head -c 8)
 
 username=$(shell cat $(dir)/credentials.json | grep '"username":' | head -n 1 | cut -d '"' -f 4)
 
+test="test-definition.yaml"
+
 ########################################
 # Build Shortcuts
 
@@ -19,7 +21,7 @@ default: test
 # Command & Control Shortcuts
 
 test:
-	genesis run test-definition.yaml $(username)
+	genesis run $(test) $(username) --follow
 
 list: 
 	genesis ps

@@ -11,180 +11,201 @@ services:
       POSTGRES_USER: indra
   - name: redis
     image: redis:5-alpine
-  # - name: node
-  #   environment:
-  #     INDRA_ADMIN_TOKEN: best-admin-ever
-  #     INDRA_ALLOWED_SWAPS: '[{"from":"0x16655FAf612D714039F92c408407D46c5A394a6C","to":"0x0000000000000000000000000000000000000000","priceOracleType":"UNISWAP"},{"from":"0x0000000000000000000000000000000000000000","to":"0x16655FAf612D714039F92c408407D46c5A394a6C","priceOracleType":"UNISWAP"}]'
-  #     INDRA_ETH_CONTRACT_ADDRESSES: '{ "4": {
-  #       "Token": {
-  #         "address": "0x16655FAf612D714039F92c408407D46c5A394a6C"
-  #       },
-  #       "SAIToken": {
-  #         "address": "0xFab46E002BbF0b4509813474841E0716E6730136"
-  #       },
-  #       "ChallengeRegistry": {
-  #         "address": "0xbceb4731df2B1f89b7197fdedDE9e86FAAa5077e",
-  #         "creationCodeHash": "0xdaa1a0baa2ab3fc4d79eaf4d29cd327db359a235904c8ab0e252e7253ed2ffa7",
-  #         "runtimeCodeHash": "0x95a7ba13e36095609ca428a901c823bafc3395fb3b36e36952b129fa0e02c654",
-  #         "txHash": "0xe22263deb8bb0ba2225cdaf96445d1d01a6463a96d30f467e11a3dc1ffbe1049"
-  #       },
-  #       "ConditionalTransactionDelegateTarget": {
-  #         "address": "0x1275E83E589bf5a337bf53DFE5D2A1D183930Ca3",
-  #         "creationCodeHash": "0x9d06758bf6a357162a9834e7cc0031b999a32cc3212c778efacd388e77cc89d1",
-  #         "runtimeCodeHash": "0x60a1a0bd66a3a307e750851baeb7e49d918bb74c79c80434a08d221b34a83e4e",
-  #         "txHash": "0x8a02acc2242d7adc36977b0bb6b99804a7b025a26cff412a711a11f0cd36bf3f"
-  #       },
-  #       "MultiAssetMultiPartyCoinTransferInterpreter": {
-  #         "address": "0x23Ba4d88B954dABCAc34dB0113647d9c8Bc0373B",
-  #         "creationCodeHash": "0x59090e59bf5ff543018fb694c257120a80f7bc303e01f9750abbbfead7568ec2",
-  #         "runtimeCodeHash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
-  #         "txHash": "0xa52badf43a0461f33f8c71cfe39d8c3d32dc21ed5d58ff3ee8d22fd043b5c597"
-  #       },
-  #       "IdentityApp": {
-  #         "address": "0xf4840e81B254045AfCC4650F8F46724BBc7EebdF",
-  #         "creationCodeHash": "0x69a7aa07d353dd3af0d1c04de3f1648aa79445a91aacd4bdc1e9bdda1fded5f0",
-  #         "runtimeCodeHash": "0x06862864c4374dfdd29016ccafbd43434dd4df81746f56a4b7d84e28bd27c15e",
-  #         "txHash": "0xdb8d4fb3c4bb7c51b68629effaf22365bd6293ce3f55cca3a5e95af7b831107b"
-  #       },
-  #       "MinimumViableMultisig": {
-  #         "address": "0xE3778fDDD0a19Ac96580779f4E13a386A6BbF775",
-  #         "creationCodeHash": "0xe8cc09c611309151470884b455eaf2f90c43fd099982d0c84af97a5a80ec7642",
-  #         "runtimeCodeHash": "0xf16920195c8c6905dbb61e1ad38dd53aa21f5cfa68e86d45b206226ef93630b6",
-  #         "txHash": "0x7042326c60d8c7bacda0507e616b716811f626593d745b1e563debc6b39bee8d"
-  #       },
-  #       "SingleAssetTwoPartyCoinTransferInterpreter": {
-  #         "address": "0x203D443f9C287a235B5C03D221748F0BF6612823",
-  #         "creationCodeHash": "0xf464da9b8922c98a988b63590770556dc512733634ef7eb1a97b22aa7f5b6de2",
-  #         "runtimeCodeHash": "0x32326cf5296c631e45d695c9df2eabe3422af0b207aebc699e2e2b01d3492578",
-  #         "txHash": "0x48e9520a91132ff653eecd8f1d4b385ee0a2cd89395ddd59e56a00fb3eb1e57e"
-  #       },
-  #       "TimeLockedPassThrough": {
-  #         "address": "0x266b0bfAcfAd4f2aFaA14E79A4EF78551b4d14B0",
-  #         "creationCodeHash": "0x24c8b09be62e63cb362dc897b98b0e5da3135d34a5885eb9d634b07ce3d8fa90",
-  #         "runtimeCodeHash": "0x7fafa4077a002c7f0233f70259dfd3603070bc443eec9ca83555daf7e2198a1a",
-  #         "txHash": "0x3bb2b03eff43392fc6912fbc118836b140e7cd97e60dafc4e822cc36eb48be0b"
-  #       },
-  #       "TwoPartyFixedOutcomeInterpreter": {
-  #         "address": "0x20596Ea6Dca105a4c1C3027B68b8ABac945A446e",
-  #         "creationCodeHash": "0x7e7afc8b48cb4cd1e5bf53af7790b476f0726011cffb2d9bafc03216c6f952c7",
-  #         "runtimeCodeHash": "0xaeac30db4c4a2ff716e9c268288d448e4f8bb52577f839df2cff17bed75d2b24",
-  #         "txHash": "0xa6707364faeae956acf43abee07be605d31e6fafe28688e16d8011f081bc9d43"
-  #       },
-  #       "TwoPartyFixedOutcomeFromVirtualAppInterpreter": {
-  #         "address": "0xaeD56d51a2C6F40071c35E68733EE6d271A2CF3D",
-  #         "creationCodeHash": "0x4c88180d1a5df5adbb999599a273b448db66c994b96738a407e8f7c30628a77a",
-  #         "runtimeCodeHash": "0xc7642c13fe9b24ece2f08c55ad7b4cf663c8aef49b9a2d8d4ae7cf6005e5733f",
-  #         "txHash": "0x8326d0218b0ef26ec73b9640fa808c7355bb09cb9526555f7edb72cbf5c9a82b"
-  #       },
-  #       "SimpleLinkedTransferApp": {
-  #         "address": "0x9f3860D5aB2D775Fb007438BebC441A096762ce0",
-  #         "creationCodeHash": "0xb875b3f7ed9d66368467e1415d6daa5b64410f497ede10dbe39e78bb81325f46",
-  #         "runtimeCodeHash": "0x7ca940614fe08a5c6656ed86dfecdc9bc27208520a83193a4bf2c2d6b9162a88",
-  #         "txHash": "0x2e273b09f099988361d05848cf847e3aef080507a5630ea215c3fbd095cc8c45"
-  #       },
-  #       "SimpleTwoPartySwapApp": {
-  #         "address": "0x25ca81C0122f082F8C45F3Da02BF0Ae85127C43b",
-  #         "creationCodeHash": "0xa822f943483d87e20eb9b61193e81f78b6e67b334ff0c6d32797f65656a956f0",
-  #         "runtimeCodeHash": "0x4588451cb884abbf5e7320a831732171a32218eaffc9673b8c2f2376305cedcb",
-  #         "txHash": "0xb553acbb3cba448d125b7aadd06363b5f11050cf5ffc69f7079a1322992b5488"
-  #       },
-  #       "ProxyFactory": {
-  #         "address": "0xC7a29e53f5039b5EaaaeBE2730d30Bd3f823E00B",
-  #         "creationCodeHash": "0x08bde892fced21bfdd23d8a37db69efffbbfc03580151840d64ed9a949461643",
-  #         "runtimeCodeHash": "0xac8f45675a678316ab0fcf39c8185f96e2fe4db7eec5f598659bc8c4007fbab5",
-  #         "txHash": "0xc5f117c84c16ee20fa5d6872dd8a439acce0c2facdd8c42b55c447a0d5d1b6f3"
-  #       },
-  #       "FastSignedTransferApp": {
-  #         "address": "0xB3775A378f38f65F1Cba9D4DA68E846C51B8A2e2",
-  #         "creationCodeHash": "0xc5c9aebb63920187e4d3217c6969c7e46646d29644ec836c1c4be3118283c949",
-  #         "runtimeCodeHash": "0xbedff84b0829fcb517dd323b22e6322a5181bb4a8fe151cb3f2be5ae30bb1a33",
-  #         "txHash": "0xaa1465e5b1a8e79e398813bf533a0e4fb51995ca1140cee999ae97bfbdfd4d44"
-  #       },
-  #       "HashLockTransferApp": {
-  #         "address": "0x64eD15529c747511ed9856571690ebd7f4Dbb9e2",
-  #         "creationCodeHash": "0x4978fb7ee1a6ff60d510d9f7242898d1040ed8af0414d3ebbb4cd4696e4a84b4",
-  #         "runtimeCodeHash": "0xfd55d382a4df61fbd807b7480abc0c202eb9840aea6c00e7e6f9073b08e0b193",
-  #         "txHash": "0xfb315e4e62a3eb2d0fe9f935513689c73a0417be3a9f314140835a99012c1c2d"
-  #       },
-  #       "WithdrawApp": {
-  #         "address": "0x5398da2eD765b34CA3e72E3eda695178D497c3EC",
-  #         "creationCodeHash": "0x209bdb52b65c2c5c388b4607479326dc3ad45ba565ded2fc5743a5cffe1bb051",
-  #         "runtimeCodeHash": "0xe08437e7acf9ec1faba1e2fe215ed93f6f0a7807e19d6232f9c59f2a3d65f050",
-  #         "txHash": "0xeaf42fd0433c2a4c8adf1beeaf27b65ecb7a98dd9f51195c2ffa059441f0b3c4"
-  #       },
-  #       "SimpleSignedTransferApp": {
-  #         "address": "0xFF14c5Caf5C063D8Ce8028fEB926a6B4f61D1DB9",
-  #         "creationCodeHash": "0x63d9e3bc309ac60f6d625b8ed24e99bb07fc64fe62f6d5214ab633eae4e75e13",
-  #         "runtimeCodeHash": "0x0dcdc865bceea840623186cb0355f39dd780ebe68bc5bebd233062cb5a7dc0fb",
-  #         "txHash": "0x1e833ebb6fd01d409b7190e74401df792e95e1f64ba55cb9c48f87b2f6ee700a"
-  #       },
-  #       "DepositApp": {
-  #         "address": "0x799022731d214be75D6D4AD9660f4cF7F33B1792",
-  #         "creationCodeHash": "0x62c4b11a37df635614823c154c96aa8211510017acc54e02c3f14e344f2dad6c",
-  #         "runtimeCodeHash": "0xa6c763f84462fded503978dcf882fe962981fc1f39ffe93764b13482178c77a4",
-  #         "txHash": "0x4791d79e39e46ccd3b7183dbccc91e909330bff2f33cef9e2f4c9e89cc334265"
-  #       },
-  #       "WithdrawInterpreter": {
-  #         "address": "0x1Ab6e9C6fDe1d832574fb2fAeCCdD3D58a9b7ace",
-  #         "creationCodeHash": "0x2d6dcb378d01b9541023bd0d1dc9ae76dcee5c1cf253c6043e1bf92af7cbcbac",
-  #         "runtimeCodeHash": "0xa08a62108fea1a8e3adabb50c5ebd0e1687668acde8eda955b5ae50cb0f6f5ba",
-  #         "txHash": "0x3307f4eefcb1e81712aa5e501ca715429ad17c3f0ca6c4604cb42c53d4fcc9aa"
-  #       }
-  #     } }'
-  #     INDRA_ETH_MNEMONIC: "pen result world dream family number embark jealous degree polar torch wait" # 0x11FeFE91b642ea10bA701858727cb1742beC32bc
-  #     INDRA_ETH_RPC_URL: "https://staging.indra.connext.network/api/ethprovider"
-  #     INDRA_LOG_LEVEL: "4"
-  #     INDRA_NATS_JWT_SIGNER_PRIVATE_KEY: |2
-  #       -----BEGIN RSA PRIVATE KEY-----
-  #       MIIEowIBAAKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQABAoIBAGZIs2ZmX5h0/JSTYAAw/KCB6W7Glg4XdY21/3VRdD+Ytj0iMaqbIGjZz/fkeRIVHnKwt4d4dgN3OoEeVyjFHMdc4eb/phxLEFqiI1bxiHvtGWP4d6XsON9Y0mBL5NJk8QNiGZjIn08tsWEmA2bm9gkyj6aPoo8BfBqA9Q5uepgmYIPT2NtEXvTbd2dedAEJDJspHKHqBfcuNBVoVhUixVSgehWGGP4GX+FvAEHbawDrwULkMvgblH+X8nBtzikp29LNpOZSRRbqF/Da0AkluFvuDUUIzitjZs5koSEAteaulkZO08BMxtovQjh/ZPtVZKZ27POCNOgRsbm/lVIXRMECgYEA2TQQ2Xy6eO5XfbiT4ZD1Z1xe9B6Ti7J2fC0ZNNSXs4DzdYVcHNIuZqfK6fGqmByvSnFut7n5Po0z2FdXc7xcKFJdBZdFP3GLXbN9vpRPIk9b6n+0df471uTYwVocmAGXez++y73j5XzHQQW4WmmC5SlKjQUWCGkuzISVjRDtlZ0CgYEAx43KPrJxSijjE2+VWYjNFVuv6KilnWoA8I2cZ7TtPi4h//r5vyOUst0egR3lJ7rBof74VttQPvqAk3GN697IrE/bSwefwG2lM1Ta0KB3jn6b/iT4ckmaOB+v6aDHq/GPW6l/sxD0RIEelRYZlsNLepRgKhcQckhjnWzQuGWSl0MCgYBYJQ0BdeCm2vKejp1U2OL+Qzo1j4MJGi+DTToBepTlv9sNQkWTXKh/+HAcaHp2qI1qhIYOAWbov5zemvNegH5Vzrb5Yd40VPvd1s2c3csPfW0ryQ+PItFd8BkWvl8EQQEcf04KmNE3fF/QP2YFKvR30z3x5LKAT08yqEuYp9oC8QKBgQCfc9XqGU3bEya3Lg8ptt0gtt2ty6xiRwSvMoiKeZCkgdpbH6EWMQktjvBD/a5Q+7KjjgfD54SMfj/lEPR1R9QTk8/HeTUWXsaFaMVbtQ0zSEm/Xq1DLTrUo8U9qmJCK0gA10SZwe9dGctlF36k8DJMpWjd2QYkO2GVthBld4wV3wKBgC7S4q0wmcrQIjyDIFmISQNdOAJhR0pJXG8mK2jECbEXxbKkAJnLj73DJ+1OVBlx4HXx54PiEkV3M3iTinf5tBSi8nA2D3s829F65XKFli1RC4rJv+2ygH8PnXX9rQKhK/v6/jeelKquH8zy894hLZe7feSsWV9GMgb5l9p+UzWB
-  #       -----END RSA PRIVATE KEY-----
-  #     INDRA_NATS_JWT_SIGNER_PUBLIC_KEY: |2
-  #       -----BEGIN PUBLIC KEY-----
-  #       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB
-  #       -----END PUBLIC KEY-----
-  #     INDRA_NATS_SERVERS: nats://nats:4222
-  #     INDRA_NATS_WS_ENDPOINT: wss://nats:4221
-  #     INDRA_PG_DATABASE: indra
-  #     INDRA_PG_HOST: database
-  #     INDRA_PG_PASSWORD: indra
-  #     INDRA_PG_PORT: "5432"
-  #     INDRA_PG_USERNAME: indra
-  #     INDRA_PORT: "8080"
-  #     INDRA_REDIS_URL: redis://redis:6379
-  #     INDRA_SUPPORTED_TOKENS: "0x16655FAf612D714039F92c408407D46c5A394a6C,0x0000000000000000000000000000000000000000"
-  #     NODE_ENV: production
-  #   image: connextproject/indra_node:7.0.0-alpha.0
+  - name: node
+    image: connextproject/indra_node:7.0.0-alpha.0
+    environment:
+      NODE_ENV: production
+      INDRA_ADMIN_TOKEN: best-admin-ever
+      INDRA_NATS_SERVERS: nats://nats-service0:4222
+      INDRA_NATS_WS_ENDPOINT: wss://nats-service0:4221
+      INDRA_PG_DATABASE: indra
+      INDRA_PG_HOST: database-service0
+      INDRA_PG_PASSWORD: indra
+      INDRA_PG_PORT: 5432
+      INDRA_PG_USERNAME: indra
+      INDRA_PORT: 8080
+      INDRA_REDIS_URL: redis://redis-service0:6379
+      INDRA_LOG_LEVEL: 4
+      INDRA_ETH_RPC_URL: https://staging.indra.connext.network/api/ethprovider
+      INDRA_ETH_MNEMONIC: "pen result world dream family number embark jealous degree polar torch wait" # 0x11FeFE91b642ea10bA701858727cb1742beC32bc
+      INDRA_SUPPORTED_TOKENS: "0x16655FAf612D714039F92c408407D46c5A394a6C,0x0000000000000000000000000000000000000000"
+      INDRA_ALLOWED_SWAPS: "[{\"from\":\"0x16655FAf612D714039F92c408407D46c5A394a6C\",\"to\":\"0x0000000000000000000000000000000000000000\",\"priceOracleType\":\"UNISWAP\"},{\"from\":\"0x0000000000000000000000000000000000000000\",\"to\":\"0x16655FAf612D714039F92c408407D46c5A394a6C\",\"priceOracleType\":\"UNISWAP\"}]"
+      INDRA_ETH_CONTRACT_ADDRESSES: '{
+        "4": {
+          "Token": {
+            "address": "0x16655FAf612D714039F92c408407D46c5A394a6C"
+          },
+          "SAIToken": {
+            "address": "0xFab46E002BbF0b4509813474841E0716E6730136"
+          },
+          "ChallengeRegistry": {
+            "address": "0xbceb4731df2B1f89b7197fdedDE9e86FAAa5077e",
+            "creationCodeHash": "0xdaa1a0baa2ab3fc4d79eaf4d29cd327db359a235904c8ab0e252e7253ed2ffa7",
+            "runtimeCodeHash": "0x95a7ba13e36095609ca428a901c823bafc3395fb3b36e36952b129fa0e02c654",
+            "txHash": "0xe22263deb8bb0ba2225cdaf96445d1d01a6463a96d30f467e11a3dc1ffbe1049"
+          },
+          "ConditionalTransactionDelegateTarget": {
+            "address": "0x1275E83E589bf5a337bf53DFE5D2A1D183930Ca3",
+            "creationCodeHash": "0x9d06758bf6a357162a9834e7cc0031b999a32cc3212c778efacd388e77cc89d1",
+            "runtimeCodeHash": "0x60a1a0bd66a3a307e750851baeb7e49d918bb74c79c80434a08d221b34a83e4e",
+            "txHash": "0x8a02acc2242d7adc36977b0bb6b99804a7b025a26cff412a711a11f0cd36bf3f"
+          },
+          "MultiAssetMultiPartyCoinTransferInterpreter": {
+            "address": "0x23Ba4d88B954dABCAc34dB0113647d9c8Bc0373B",
+            "creationCodeHash": "0x59090e59bf5ff543018fb694c257120a80f7bc303e01f9750abbbfead7568ec2",
+            "runtimeCodeHash": "0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470",
+            "txHash": "0xa52badf43a0461f33f8c71cfe39d8c3d32dc21ed5d58ff3ee8d22fd043b5c597"
+          },
+          "IdentityApp": {
+            "address": "0xf4840e81B254045AfCC4650F8F46724BBc7EebdF",
+            "creationCodeHash": "0x69a7aa07d353dd3af0d1c04de3f1648aa79445a91aacd4bdc1e9bdda1fded5f0",
+            "runtimeCodeHash": "0x06862864c4374dfdd29016ccafbd43434dd4df81746f56a4b7d84e28bd27c15e",
+            "txHash": "0xdb8d4fb3c4bb7c51b68629effaf22365bd6293ce3f55cca3a5e95af7b831107b"
+          },
+          "MinimumViableMultisig": {
+            "address": "0xE3778fDDD0a19Ac96580779f4E13a386A6BbF775",
+            "creationCodeHash": "0xe8cc09c611309151470884b455eaf2f90c43fd099982d0c84af97a5a80ec7642",
+            "runtimeCodeHash": "0xf16920195c8c6905dbb61e1ad38dd53aa21f5cfa68e86d45b206226ef93630b6",
+            "txHash": "0x7042326c60d8c7bacda0507e616b716811f626593d745b1e563debc6b39bee8d"
+          },
+          "SingleAssetTwoPartyCoinTransferInterpreter": {
+            "address": "0x203D443f9C287a235B5C03D221748F0BF6612823",
+            "creationCodeHash": "0xf464da9b8922c98a988b63590770556dc512733634ef7eb1a97b22aa7f5b6de2",
+            "runtimeCodeHash": "0x32326cf5296c631e45d695c9df2eabe3422af0b207aebc699e2e2b01d3492578",
+            "txHash": "0x48e9520a91132ff653eecd8f1d4b385ee0a2cd89395ddd59e56a00fb3eb1e57e"
+          },
+          "TimeLockedPassThrough": {
+            "address": "0x266b0bfAcfAd4f2aFaA14E79A4EF78551b4d14B0",
+            "creationCodeHash": "0x24c8b09be62e63cb362dc897b98b0e5da3135d34a5885eb9d634b07ce3d8fa90",
+            "runtimeCodeHash": "0x7fafa4077a002c7f0233f70259dfd3603070bc443eec9ca83555daf7e2198a1a",
+            "txHash": "0x3bb2b03eff43392fc6912fbc118836b140e7cd97e60dafc4e822cc36eb48be0b"
+          },
+          "TwoPartyFixedOutcomeInterpreter": {
+            "address": "0x20596Ea6Dca105a4c1C3027B68b8ABac945A446e",
+            "creationCodeHash": "0x7e7afc8b48cb4cd1e5bf53af7790b476f0726011cffb2d9bafc03216c6f952c7",
+            "runtimeCodeHash": "0xaeac30db4c4a2ff716e9c268288d448e4f8bb52577f839df2cff17bed75d2b24",
+            "txHash": "0xa6707364faeae956acf43abee07be605d31e6fafe28688e16d8011f081bc9d43"
+          },
+          "TwoPartyFixedOutcomeFromVirtualAppInterpreter": {
+            "address": "0xaeD56d51a2C6F40071c35E68733EE6d271A2CF3D",
+            "creationCodeHash": "0x4c88180d1a5df5adbb999599a273b448db66c994b96738a407e8f7c30628a77a",
+            "runtimeCodeHash": "0xc7642c13fe9b24ece2f08c55ad7b4cf663c8aef49b9a2d8d4ae7cf6005e5733f",
+            "txHash": "0x8326d0218b0ef26ec73b9640fa808c7355bb09cb9526555f7edb72cbf5c9a82b"
+          },
+          "SimpleLinkedTransferApp": {
+            "address": "0x9f3860D5aB2D775Fb007438BebC441A096762ce0",
+            "creationCodeHash": "0xb875b3f7ed9d66368467e1415d6daa5b64410f497ede10dbe39e78bb81325f46",
+            "runtimeCodeHash": "0x7ca940614fe08a5c6656ed86dfecdc9bc27208520a83193a4bf2c2d6b9162a88",
+            "txHash": "0x2e273b09f099988361d05848cf847e3aef080507a5630ea215c3fbd095cc8c45"
+          },
+          "SimpleTwoPartySwapApp": {
+            "address": "0x25ca81C0122f082F8C45F3Da02BF0Ae85127C43b",
+            "creationCodeHash": "0xa822f943483d87e20eb9b61193e81f78b6e67b334ff0c6d32797f65656a956f0",
+            "runtimeCodeHash": "0x4588451cb884abbf5e7320a831732171a32218eaffc9673b8c2f2376305cedcb",
+            "txHash": "0xb553acbb3cba448d125b7aadd06363b5f11050cf5ffc69f7079a1322992b5488"
+          },
+          "ProxyFactory": {
+            "address": "0xC7a29e53f5039b5EaaaeBE2730d30Bd3f823E00B",
+            "creationCodeHash": "0x08bde892fced21bfdd23d8a37db69efffbbfc03580151840d64ed9a949461643",
+            "runtimeCodeHash": "0xac8f45675a678316ab0fcf39c8185f96e2fe4db7eec5f598659bc8c4007fbab5",
+            "txHash": "0xc5f117c84c16ee20fa5d6872dd8a439acce0c2facdd8c42b55c447a0d5d1b6f3"
+          },
+          "FastSignedTransferApp": {
+            "address": "0xB3775A378f38f65F1Cba9D4DA68E846C51B8A2e2",
+            "creationCodeHash": "0xc5c9aebb63920187e4d3217c6969c7e46646d29644ec836c1c4be3118283c949",
+            "runtimeCodeHash": "0xbedff84b0829fcb517dd323b22e6322a5181bb4a8fe151cb3f2be5ae30bb1a33",
+            "txHash": "0xaa1465e5b1a8e79e398813bf533a0e4fb51995ca1140cee999ae97bfbdfd4d44"
+          },
+          "HashLockTransferApp": {
+            "address": "0x64eD15529c747511ed9856571690ebd7f4Dbb9e2",
+            "creationCodeHash": "0x4978fb7ee1a6ff60d510d9f7242898d1040ed8af0414d3ebbb4cd4696e4a84b4",
+            "runtimeCodeHash": "0xfd55d382a4df61fbd807b7480abc0c202eb9840aea6c00e7e6f9073b08e0b193",
+            "txHash": "0xfb315e4e62a3eb2d0fe9f935513689c73a0417be3a9f314140835a99012c1c2d"
+          },
+          "WithdrawApp": {
+            "address": "0x5398da2eD765b34CA3e72E3eda695178D497c3EC",
+            "creationCodeHash": "0x209bdb52b65c2c5c388b4607479326dc3ad45ba565ded2fc5743a5cffe1bb051",
+            "runtimeCodeHash": "0xe08437e7acf9ec1faba1e2fe215ed93f6f0a7807e19d6232f9c59f2a3d65f050",
+            "txHash": "0xeaf42fd0433c2a4c8adf1beeaf27b65ecb7a98dd9f51195c2ffa059441f0b3c4"
+          },
+          "SimpleSignedTransferApp": {
+            "address": "0xFF14c5Caf5C063D8Ce8028fEB926a6B4f61D1DB9",
+            "creationCodeHash": "0x63d9e3bc309ac60f6d625b8ed24e99bb07fc64fe62f6d5214ab633eae4e75e13",
+            "runtimeCodeHash": "0x0dcdc865bceea840623186cb0355f39dd780ebe68bc5bebd233062cb5a7dc0fb",
+            "txHash": "0x1e833ebb6fd01d409b7190e74401df792e95e1f64ba55cb9c48f87b2f6ee700a"
+          },
+          "DepositApp": {
+            "address": "0x799022731d214be75D6D4AD9660f4cF7F33B1792",
+            "creationCodeHash": "0x62c4b11a37df635614823c154c96aa8211510017acc54e02c3f14e344f2dad6c",
+            "runtimeCodeHash": "0xa6c763f84462fded503978dcf882fe962981fc1f39ffe93764b13482178c77a4",
+            "txHash": "0x4791d79e39e46ccd3b7183dbccc91e909330bff2f33cef9e2f4c9e89cc334265"
+          },
+          "WithdrawInterpreter": {
+            "address": "0x1Ab6e9C6fDe1d832574fb2fAeCCdD3D58a9b7ace",
+            "creationCodeHash": "0x2d6dcb378d01b9541023bd0d1dc9ae76dcee5c1cf253c6043e1bf92af7cbcbac",
+            "runtimeCodeHash": "0xa08a62108fea1a8e3adabb50c5ebd0e1687668acde8eda955b5ae50cb0f6f5ba",
+            "txHash": "0x3307f4eefcb1e81712aa5e501ca715429ad17c3f0ca6c4604cb42c53d4fcc9aa"
+          }
+        }
+      }'
+      INDRA_NATS_JWT_SIGNER_PRIVATE_KEY: "\n-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQABAoIBAGZIs2ZmX5h0/JSTYAAw/KCB6W7Glg4XdY21/3VRdD+Ytj0iMaqbIGjZz/fkeRIVHnKwt4d4dgN3OoEeVyjFHMdc4eb/phxLEFqiI1bxiHvtGWP4d6XsON9Y0mBL5NJk8QNiGZjIn08tsWEmA2bm9gkyj6aPoo8BfBqA9Q5uepgmYIPT2NtEXvTbd2dedAEJDJspHKHqBfcuNBVoVhUixVSgehWGGP4GX+FvAEHbawDrwULkMvgblH+X8nBtzikp29LNpOZSRRbqF/Da0AkluFvuDUUIzitjZs5koSEAteaulkZO08BMxtovQjh/ZPtVZKZ27POCNOgRsbm/lVIXRMECgYEA2TQQ2Xy6eO5XfbiT4ZD1Z1xe9B6Ti7J2fC0ZNNSXs4DzdYVcHNIuZqfK6fGqmByvSnFut7n5Po0z2FdXc7xcKFJdBZdFP3GLXbN9vpRPIk9b6n+0df471uTYwVocmAGXez++y73j5XzHQQW4WmmC5SlKjQUWCGkuzISVjRDtlZ0CgYEAx43KPrJxSijjE2+VWYjNFVuv6KilnWoA8I2cZ7TtPi4h//r5vyOUst0egR3lJ7rBof74VttQPvqAk3GN697IrE/bSwefwG2lM1Ta0KB3jn6b/iT4ckmaOB+v6aDHq/GPW6l/sxD0RIEelRYZlsNLepRgKhcQckhjnWzQuGWSl0MCgYBYJQ0BdeCm2vKejp1U2OL+Qzo1j4MJGi+DTToBepTlv9sNQkWTXKh/+HAcaHp2qI1qhIYOAWbov5zemvNegH5Vzrb5Yd40VPvd1s2c3csPfW0ryQ+PItFd8BkWvl8EQQEcf04KmNE3fF/QP2YFKvR30z3x5LKAT08yqEuYp9oC8QKBgQCfc9XqGU3bEya3Lg8ptt0gtt2ty6xiRwSvMoiKeZCkgdpbH6EWMQktjvBD/a5Q+7KjjgfD54SMfj/lEPR1R9QTk8/HeTUWXsaFaMVbtQ0zSEm/Xq1DLTrUo8U9qmJCK0gA10SZwe9dGctlF36k8DJMpWjd2QYkO2GVthBld4wV3wKBgC7S4q0wmcrQIjyDIFmISQNdOAJhR0pJXG8mK2jECbEXxbKkAJnLj73DJ+1OVBlx4HXx54PiEkV3M3iTinf5tBSi8nA2D3s829F65XKFli1RC4rJv+2ygH8PnXX9rQKhK/v6/jeelKquH8zy894hLZe7feSsWV9GMgb5l9p+UzWB\n-----END RSA PRIVATE KEY-----\n"
+      INDRA_NATS_JWT_SIGNER_PUBLIC_KEY: "\n-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/ßlBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB\n-----END PUBLIC KEY-----\n"
+
+task-runners:
+  - name: start_node
+    script:
+      inline: printenv && sleep 300 && curl http://localhost:8080/config >> /indra/node/config.json
+    volumes:
+      - name: node
+        path: /indra/node
 
 tests:
   - name: start_services
     description: Starts the node (and all dependency services), and client bot
-    system:
-      - type: nats
-        name: nats
+    system: # define services and sidecars
+      - name: nats
+        type: nats
         count: 1
+        resources:
+          networks:
+            - name: common
         port-mappings:
           - 4222:4222
-      - type: database
-        name: database
+          - 4221:4221
+
+      - name: database
+        type: database
         count: 1
+        resources:
+          networks:
+            - name: common
         port-mappings:
           - 5432:5432
-      - type: redis
-        name: redis
+
+      - name: redis
+        type: redis
         count: 1
+        resources:
+          networks:
+            - name: common
         port-mappings:
           - 6379:6379
-      # - type: node
-      #   name: node
-      #   count: 1
-      #   port-mappings:
-      #     - 8080:8080
+
+      - name: node
+        type: node
+        count: 1
+        resources:
+          networks:
+            - name: common
+        port-mappings:
+          - 8080:8080
+
     wait-for: 1h
-    # phases:
-    #   - name: dependency_services
-    #     description: Starts database, nats, and redis services
-    #     tasks:
-    #       - type:
-    #         timeout: 5 m # wait 5m for services to start
-    #   - name: node
-    #   - name: client
+    phases:
+      - name: dependency_services
+        description: Starts database, nats, and redis services. Writes node config to indra/node/config.json
+        tasks:
+          - type: start_node
+            timeout: 30 m # wait 30m for services to start
+      # - name: node
+      # - name: client

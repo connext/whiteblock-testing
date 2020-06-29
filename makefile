@@ -29,5 +29,8 @@ list:
 logs: 
 	genesis logs all
 
+commands:
+	genesis commands $(test)
+
 stop:
 	genesis stop

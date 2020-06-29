@@ -12,7 +12,7 @@ services:
     environment:
       JWT_SIGNER_PUBLIC_KEY: "\n-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB\n-----END PUBLIC KEY-----\n"
   - name: bot_registry
-    image: connextproject/indra_bot:3119ee49
+    image: connextproject/indra_bot:be6a5dff
   - name: node
     image: connextproject/indra_node:7b0bda72
     environment:
@@ -107,5 +107,3 @@ tests:
         tasks:
           - type: ping_registry
             timeout: 30 m # wait 30m for services to start
-      # - name: node
-      # - name: client

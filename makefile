@@ -26,5 +26,8 @@ test:
 list: 
 	genesis ps
 
+logs: 
+	genesis logs all
+
 stop:
 	genesis stop

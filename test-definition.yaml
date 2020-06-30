@@ -12,9 +12,9 @@ services:
     environment:
       JWT_SIGNER_PUBLIC_KEY: "\n-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB\n-----END PUBLIC KEY-----\n"
   - name: bot_registry
-    image: connextproject/indra_bot:be6a5dff
+    image: connextproject/indra_bot:c0da7761
   - name: node
-    image: connextproject/indra_node:7b0bda72
+    image: connextproject/indra_node:c0da7761
     environment:
       NODE_ENV: production
       INDRA_ADMIN_TOKEN: best-admin-ever
@@ -49,6 +49,21 @@ task-runners:
     volumes:
       - name: bot_registry
         path: /indra/bot_registry
+  - name: single_agent
+    image: connextproject/indra_bot:c0da7761
+    volumes:
+      - name: agent
+        path: /indra/agent
+    script:
+      inline: bash ops/bot.sh 1 1000 10
+    input-files:
+      - source-path: ./ops/bot.sh
+        destination-path: /ops/bot.sh
+    environment:
+      INDRA_ETH_RPC_URL: https://staging.indra.connext.network/api/ethprovider
+      INDRA_NODE_URL: http://node-service0:8080
+      INDRA_NATS_URL: nats://nats-service0:4222
+      BOT_REGISTRY_URL: http://bot_registry-service0:3333
 
 tests:
   - name: start_services
@@ -106,4 +121,9 @@ tests:
         description: Starts registry and writes bots array to /indra/bot_registry/registry.json
         tasks:
           - type: ping_registry
+            timeout: 30 m # wait 30m for services to start
+      - name: single_agent
+        description: Runs 1 bot with 10 payments at 1s interval
+        tasks:
+          - type: single_agent
             timeout: 30 m # wait 30m for services to start

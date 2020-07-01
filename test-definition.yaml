@@ -12,9 +12,26 @@ services:
     environment:
       JWT_SIGNER_PUBLIC_KEY: "\n-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqU/GXp8MqmugQyRk5FUFBvlJt1/h7L3Crzlzejz/OxriZdq/lBNQW9S1kzGc7qjXprZ1Kg3zP6irr6wmvP0WYBGltWs2cWUAmxh0PSxuKdT/OyL9w+rjKLh4yo3ex6DX3Ij0iP01Ej2POe5WrPDS8j6LT0s4HZ1FprL5h7RUQWV3cO4pF+1kl6HlBpNzEQzocW9ig4DNdSeUENARHWoCixE1gFYo9RXm7acqgqCk3ihdJRIbO4e/m1aZq2mvAFK+yHTIWBL0p5PF0Fe8zcWdNeEATYB+eRdNJ3jjS8447YrcbQcBQmhFjk8hbCnc3Rv3HvAapk8xDFhImdVF1ffDFwIDAQAB\n-----END PUBLIC KEY-----\n"
   - name: bot_registry
-    image: connextproject/indra_bot:c0da7761
+    image: connextproject/indra_bot:8092ba75
+  - name: agent
+    image: connextproject/indra_bot:8092ba75
+    volumes:
+      - name: agent
+        path: /indra/agent
+    script:
+      inline: ls && bash /ops/bot.sh 1 1000 10
+    input-files:
+      - source-path: ./ops/bot.sh
+        destination-path: /ops/bot.sh
+    environment:
+      INDRA_ETH_RPC_URL: https://staging.indra.connext.network/api/ethprovider
+      INDRA_NODE_URL: http://node-service0:8080
+      INDRA_NATS_URL: nats://nats-service0:4222
+      BOT_REGISTRY_URL: http://bot_registry-service0:3333
+      TOKEN_ADDRESS: "0x16655FAf612D714039F92c408407D46c5A394a6C"
+      FUNDER_MNEMONIC: "pen result world dream family number embark jealous degree polar torch wait" # 0x11FeFE91b642ea10bA701858727cb1742beC32bc
   - name: node
-    image: connextproject/indra_node:c0da7761
+    image: connextproject/indra_node:8092ba75
     environment:
       NODE_ENV: production
       INDRA_ADMIN_TOKEN: best-admin-ever
@@ -49,21 +66,22 @@ task-runners:
     volumes:
       - name: bot_registry
         path: /indra/bot_registry
-  - name: single_agent
-    image: connextproject/indra_bot:c0da7761
-    volumes:
-      - name: agent
-        path: /indra/agent
-    script:
-      inline: bash ops/bot.sh 1 1000 10
-    input-files:
-      - source-path: ./ops/bot.sh
-        destination-path: /ops/bot.sh
-    environment:
-      INDRA_ETH_RPC_URL: https://staging.indra.connext.network/api/ethprovider
-      INDRA_NODE_URL: http://node-service0:8080
-      INDRA_NATS_URL: nats://nats-service0:4222
-      BOT_REGISTRY_URL: http://bot_registry-service0:3333
+  # - name: single_agent
+  #   image: connextproject/indra_bot:8092ba75
+  #   volumes:
+  #     - name: agent
+  #       path: /indra/agent
+  #   script:
+  #     inline: bash ops/bot.sh 1 1000 10
+  #   input-files:
+  #     - source-path: ./ops/bot.sh
+  #       destination-path: /ops/bot.sh
+  #   environment:
+  #     INDRA_ETH_RPC_URL: https://staging.indra.connext.network/api/ethprovider
+  #     INDRA_NODE_URL: http://node-service0:8080
+  #     INDRA_NATS_URL: nats://nats-service0:4222
+  #     BOT_REGISTRY_URL: http://bot_registry-service0:3333
+  #     FUNDER_MNEMONIC: "pen result world dream family number embark jealous degree polar torch wait" # 0x11FeFE91b642ea10bA701858727cb1742beC32bc
 
 tests:
   - name: start_services
@@ -103,6 +121,12 @@ tests:
             - name: common
         port-mappings:
           - 3333:3333
+      - name: agent
+        type: agent
+        count: 1
+        resources:
+          networks:
+            - name: common
       - name: node
         type: node
         count: 1
@@ -122,8 +146,8 @@ tests:
         tasks:
           - type: ping_registry
             timeout: 30 m # wait 30m for services to start
-      - name: single_agent
-        description: Runs 1 bot with 10 payments at 1s interval
-        tasks:
-          - type: single_agent
-            timeout: 30 m # wait 30m for services to start
+      # - name: single_agent
+      #   description: Runs 1 bot with 10 payments at 1s interval
+      #   tasks:
+      #     - type: single_agent
+      #       timeout: 30 m # wait 30m for services to start

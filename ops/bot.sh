@@ -11,6 +11,8 @@ INDRA_ETH_RPC_URL="${INDRA_ETH_RPC_URL}"
 INDRA_NODE_URL="${INDRA_NODE_URL}"
 INDRA_NATS_URL="${INDRA_NATS_URL}"
 BOT_REGISTRY_URL="${BOT_REGISTRY_URL}"
+FUNDER_MNEMONIC="${FUNDER_MNEMONIC}"
+TOKEN_ADDRESS="${TOKEN_ADDRESS}"
 
 # Wait for services to come up
 function wait_for {
@@ -45,8 +47,13 @@ agent_address="`node <<<'var eth = require("ethers"); console.log((new eth.Walle
 agent_pub_key="`node <<<'var eth = require("ethers"); console.log((new eth.Wallet("'"$agent_key"'")).publicKey);'`"
 
 # Fund agent w/0.001 eth
-echo "Funding agent: $agent_address (pubKey: ${agent_pub_key})"
-node contracts/dist/src.ts/cli.js fund --to-address="$agent_address" --amount="0.001"
+echo "Funding agent: $agent_address (pubKey: ${agent_pub_key}) with eth"
+node contracts/dist/src.ts/cli.js fund --to-address="$agent_address" --amount="0.001" --eth-provider="$INDRA_ETH_RPC_URL" --from-mnemonic="$FUNDER_MNEMONIC"
+echo
+
+# Fund agent w/tokens
+echo "Funding agent: $agent_address (pubKey: ${agent_pub_key}) with tokens"
+node contracts/dist/src.ts/cli.js drip --eth-provider="$INDRA_ETH_RPC_URL" --private-key="$agent_key" --address-book="contracts/dist/address-book.json" 
 
 echo "Starting agent container.."
 
@@ -56,7 +63,8 @@ function finish {
 trap finish SIGTERM SIGINT
 echo "Launching agent!";echo
 node dist/src/index.js bot \
-  --private-key '$agent_key' \
-  --concurrency-index '$agents' \
-  --interval '$interval' \
-  --limit '$limit'
+  --private-key "$agent_key" \
+  --concurrency-index "$agent" \
+  --interval "$interval" \
+  --limit "$limit" \
+  --token-address "$TOKEN_ADDRESS"
